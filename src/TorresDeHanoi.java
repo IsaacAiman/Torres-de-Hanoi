@@ -2,18 +2,19 @@ import java.util.ArrayList;
 
 public class TorresDeHanoi {
 
-	Integer numeroDiscos;
-	ArrayList<Disco> discos;
-	Integer numeroDeMovimientos;
-	Boolean debug;
-	Varilla origen;
-	Varilla auxiliar;
-	Varilla destino;
+	private Integer numeroDiscos;
+	private ArrayList<Disco> discos;
+	private Integer numeroDeMovimientosSimples;
+	private Integer numeroDeMovimientosCiclico;
+	private	Boolean debug;
+	private Varilla origen;
+	private Varilla auxiliar;
+	private Varilla destino;
 	
 	TorresDeHanoi(){
 		
 		setNumeroDiscos(3);
-		setNumeroDeMovimientos(0);
+		setNumeroDeMovimientosSimples(0);
 		setDebug(false);
 		setOrigen(new Varilla(1));
 		setAuxiliar(new Varilla(2));
@@ -25,26 +26,37 @@ public class TorresDeHanoi {
 		
 		setDiscos(new ArrayList<Disco>());
 		setNumeroDiscos(numeroDiscos);
-		for (int i = getNumeroDiscos(); i  > 0; i--){
-			getDiscos().add(new Disco(i));		
-		}
-		setNumeroDeMovimientos(0);
+		setNumeroDeMovimientosSimples(0);
 		setDebug(false);
+
+	}
+	public void restart(){
 		setOrigen(new Varilla(1));
 		setAuxiliar(new Varilla(2));
 		setDestino(new Varilla(3));
+		for (int i = getNumeroDiscos(); i  > 0; i--){
+			getDiscos().add(new Disco(i));		
+		}
+		getOrigen().setDiscos(getDiscos());
+		
+		
 	}
-	
 	public void start(Boolean debug){
 		setDebug(debug);
-		getOrigen().setDiscos(getDiscos());
+		restart();
+		System.out.println("\n--------------Hanoi simple--------------");
 		mostrarMovimiento();
-		Hanoi(getNumeroDiscos(), getOrigen(), getAuxiliar(), getDestino());		
-		
+		Hanoi(getNumeroDiscos(), getOrigen(), getAuxiliar(), getDestino());
+	}
+	
+	public void startCiclico(){
+		System.out.println("\n--------------Hanoi cíclico--------------");
+		restart();
+		HanoiSentidoHorario(getNumeroDiscos(), getOrigen(), getAuxiliar(), getDestino());	
 	}
 	
 	public void Hanoi(Integer numeroDiscos, Varilla origen, Varilla auxiliar, Varilla destino){
-		setNumeroDeMovimientos(getNumeroDeMovimientos() + 1);
+		setNumeroDeMovimientosSimples(getNumeroDeMovimientosSimples() + 1);
 		
 		if (numeroDiscos == 1){
 			destino.addDisco(origen.popDisco());
@@ -55,9 +67,52 @@ public class TorresDeHanoi {
 			destino.addDisco(origen.popDisco());
 			mostrarMovimiento();
 			Hanoi(numeroDiscos - 1, auxiliar, origen, destino);
+		}	
+	}
+	
+	public void HanoiSentidoHorario(Integer numeroDiscos, Varilla a, Varilla b, Varilla c){
+		
+		if (numeroDiscos > 0){
+			HanoiSentidoAntiHorario(numeroDiscos - 1, a, c, b);
+			moverSiguiente(a);
+			mostrarMovimiento();
+			System.out.println("Mueve un disco de de la varilla " + a.getNumeroVarilla());
+			HanoiSentidoAntiHorario(numeroDiscos - 1, c, b, a);
 		}
 		
+	}
+	
+	public void HanoiSentidoAntiHorario(Integer numeroDiscos, Varilla a, Varilla b, Varilla c){
 		
+		if (numeroDiscos > 0){
+			HanoiSentidoAntiHorario(numeroDiscos - 1, a, b, c);
+			moverSiguiente(a);
+			mostrarMovimiento();
+			System.out.println("Mueve un disco de de la varilla " + a.getNumeroVarilla());
+			HanoiSentidoHorario(numeroDiscos - 1, b, a, c);
+			moverSiguiente(c);
+			mostrarMovimiento();
+			System.out.println("Mueve un disco de de la varilla " + c.getNumeroVarilla());
+			HanoiSentidoAntiHorario(numeroDiscos - 1, a, b, c);
+		}
+		
+	}
+	
+	public void moverSiguiente(Varilla varilla){
+		
+		switch(varilla.getNumeroVarilla()){
+		
+			case 1:
+				auxiliar.addDisco(varilla.popDisco());
+				break;
+			case 2:
+				destino.addDisco(varilla.popDisco());
+				break;
+			case 3:
+				origen.addDisco(varilla.popDisco());
+				break;
+		
+		}
 		
 	}
 	
@@ -87,12 +142,12 @@ public class TorresDeHanoi {
 		this.discos = discos;
 	}
 
-	public Integer getNumeroDeMovimientos() {
-		return numeroDeMovimientos;
+	public Integer getNumeroDeMovimientosSimples() {
+		return numeroDeMovimientosSimples;
 	}
 
-	public void setNumeroDeMovimientos(Integer numeroDeMovimientos) {
-		this.numeroDeMovimientos = numeroDeMovimientos;
+	public void setNumeroDeMovimientosSimples(Integer numeroDeMovimientos) {
+		this.numeroDeMovimientosSimples = numeroDeMovimientos;
 	}
 
 	public Boolean getDebug() {
@@ -126,9 +181,13 @@ public class TorresDeHanoi {
 	public void setDestino(Varilla destino) {
 		this.destino = destino;
 	}
-	
-	
-	
-	
+
+	public Integer getNumeroDeMovimientosCiclico() {
+		return numeroDeMovimientosCiclico;
+	}
+
+	public void setNumeroDeMovimientosCiclico(Integer numeroDeMovimientosCiclico) {
+		this.numeroDeMovimientosCiclico = numeroDeMovimientosCiclico;
+	}	
 	
 }

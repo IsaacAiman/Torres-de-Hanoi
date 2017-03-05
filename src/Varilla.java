@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Varilla {
 	
-	Integer numeroVarilla;
-	ArrayList<Disco> discos;
+	private Integer numeroVarilla;
+	private ArrayList<Disco> discos;
 	
 	Varilla(){
 		setNumeroVarilla(0);

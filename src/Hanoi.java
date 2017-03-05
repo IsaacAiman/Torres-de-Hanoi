@@ -11,9 +11,10 @@ public class Hanoi {
 		else{
 			if (args[1].equals("1")){
 				juego.start(true);
+				juego.startCiclico();
 			}
 		}
-		System.out.println("Número de movimientos: " + juego.getNumeroDeMovimientos() + ".");
+		System.out.println("Número de movimientos: " + juego.getNumeroDeMovimientosSimples() + ".");
 		System.out.println("Juego finalizado.");
 	}
 

@@ -1,7 +1,7 @@
 
 public class Disco {
 
-	Integer size;
+	private Integer size;
 	
 	Disco(){
 		
