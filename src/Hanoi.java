@@ -1,4 +1,16 @@
+/*
+ * Clase que ejecuta el juego "Las Torres de Hanoi"
+ * 
+ * Isaac Aimán Salas
+ * 
+ */
 
+/**
+ * 
+ * Clase que ejecuta el juego "Las Torres de Hanoi" en su modalidad simple y cíclica.
+ * @author Isaac
+ *
+ */
 public class Hanoi {
 
 	public static void main(String[] args) {
