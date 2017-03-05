@@ -36,7 +36,7 @@ public class TorresDeHanoi {
 	}
 	
 	public void start(Boolean debug){
-		
+		setDebug(debug);
 		getOrigen().setDiscos(getDiscos());
 		mostrarMovimiento();
 		Hanoi(getNumeroDiscos(), getOrigen(), getAuxiliar(), getDestino());		
@@ -62,10 +62,12 @@ public class TorresDeHanoi {
 	}
 	
 	public void mostrarMovimiento(){
-		System.out.println(getOrigen());
-		System.out.println(getAuxiliar());
-		System.out.println(getDestino());
-		System.out.println("====================");
+		if(getDebug()){
+			System.out.println(getOrigen());
+			System.out.println(getAuxiliar());
+			System.out.println(getDestino());
+			System.out.println("====================");
+		}
 		
 	}
 
