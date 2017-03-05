@@ -7,6 +7,7 @@ public class Hanoi {
 		
 		if (args[1].equals("0")){
 			juego.start(false);
+			juego.startCiclico();
 		}
 		else{
 			if (args[1].equals("1")){
@@ -14,7 +15,8 @@ public class Hanoi {
 				juego.startCiclico();
 			}
 		}
-		System.out.println("Número de movimientos: " + juego.getNumeroDeMovimientosSimples() + ".");
+		System.out.println("Número de movimientos simples: " + juego.getNumeroDeMovimientosSimples() + ".");
+		System.out.println("Número de movimientos cíclicos: " + juego.getNumeroDeMovimientosCiclico() + ".");
 		System.out.println("Juego finalizado.");
 	}
 

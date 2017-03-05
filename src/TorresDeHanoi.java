@@ -15,6 +15,7 @@ public class TorresDeHanoi {
 		
 		setNumeroDiscos(3);
 		setNumeroDeMovimientosSimples(0);
+		setNumeroDeMovimientosCiclico(0);
 		setDebug(false);
 		setOrigen(new Varilla(1));
 		setAuxiliar(new Varilla(2));
@@ -27,6 +28,7 @@ public class TorresDeHanoi {
 		setDiscos(new ArrayList<Disco>());
 		setNumeroDiscos(numeroDiscos);
 		setNumeroDeMovimientosSimples(0);
+		setNumeroDeMovimientosCiclico(0);
 		setDebug(false);
 
 	}
@@ -75,24 +77,24 @@ public class TorresDeHanoi {
 		if (numeroDiscos > 0){
 			HanoiSentidoAntiHorario(numeroDiscos - 1, a, c, b);
 			moverSiguiente(a);
+			setNumeroDeMovimientosCiclico(getNumeroDeMovimientosCiclico() + 1);
 			mostrarMovimiento();
-			System.out.println("Mueve un disco de de la varilla " + a.getNumeroVarilla());
 			HanoiSentidoAntiHorario(numeroDiscos - 1, c, b, a);
 		}
 		
 	}
 	
 	public void HanoiSentidoAntiHorario(Integer numeroDiscos, Varilla a, Varilla b, Varilla c){
-		
+
 		if (numeroDiscos > 0){
 			HanoiSentidoAntiHorario(numeroDiscos - 1, a, b, c);
 			moverSiguiente(a);
+			setNumeroDeMovimientosCiclico(getNumeroDeMovimientosCiclico() + 1);
 			mostrarMovimiento();
-			System.out.println("Mueve un disco de de la varilla " + a.getNumeroVarilla());
 			HanoiSentidoHorario(numeroDiscos - 1, b, a, c);
 			moverSiguiente(c);
+			setNumeroDeMovimientosCiclico(getNumeroDeMovimientosCiclico() + 1);
 			mostrarMovimiento();
-			System.out.println("Mueve un disco de de la varilla " + c.getNumeroVarilla());
 			HanoiSentidoAntiHorario(numeroDiscos - 1, a, b, c);
 		}
 		
