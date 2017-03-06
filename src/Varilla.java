@@ -88,7 +88,6 @@ public class Varilla {
 			}
 		}
 		
-		
 		return returnString;
 		
 	}

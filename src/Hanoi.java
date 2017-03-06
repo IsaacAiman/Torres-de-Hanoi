@@ -30,6 +30,9 @@ public class Hanoi {
 		System.out.println("Número de movimientos simples: " + juego.getNumeroDeMovimientosSimples() + ".");
 		System.out.println("Número de movimientos cíclicos: " + juego.getNumeroDeMovimientosCiclico() + ".");
 		System.out.println("Juego finalizado.");
+		
 	}
-
+		
+		
 }
+

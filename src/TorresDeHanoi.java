@@ -16,6 +16,7 @@ public class TorresDeHanoi {
 	private Varilla origen;
 	private Varilla auxiliar;
 	private Varilla destino;
+	private long duration;
 	
 	/**
 	 * Constructor por defecto. Establece el juego con 3 discos.
@@ -74,7 +75,10 @@ public class TorresDeHanoi {
 		restart();
 		System.out.println("\n--------------Hanoi simple--------------");
 		mostrarMovimiento();
+		long startTime = System.nanoTime();
 		Hanoi(getNumeroDiscos(), getOrigen(), getAuxiliar(), getDestino());
+		long endTime = System.nanoTime();
+		setDuration(endTime - startTime);
 	}
 	/**
 	 * Ejecuta el juego "Las Torres de Hanoi" en su modalidad cíclica.
@@ -92,7 +96,7 @@ public class TorresDeHanoi {
 	public void Hanoi(Integer numeroDiscos, Varilla origen, Varilla auxiliar, Varilla destino){
 		setNumeroDeMovimientosSimples(getNumeroDeMovimientosSimples() + 1);
 		
-		if (numeroDiscos == 1){
+		if (numeroDiscos  == 1){
 			destino.addDisco(origen.popDisco());
 			mostrarMovimiento();
 		}
@@ -285,6 +289,16 @@ public class TorresDeHanoi {
 	 */
 	public void setNumeroDeMovimientosCiclico(Integer numeroDeMovimientosCiclico) {
 		this.numeroDeMovimientosCiclico = numeroDeMovimientosCiclico;
+	}
+
+	public long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(long duration) {
+		this.duration = duration;
 	}	
+	
+	
 	
 }
